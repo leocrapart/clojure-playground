@@ -113,6 +113,10 @@
 (mapcat)
 (defn f3 [el]
   [el])
+(map f3 [1 2 3])
+(concat [1] [2] [3])
+
+(mapcat f3 [1 2 3])
 
 (conj [1] 2)
 (concat)
