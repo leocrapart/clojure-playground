@@ -146,7 +146,9 @@
 (conj {:a 1 :b 2} {:c 3})
 (conj {:a 1 :b 2} [:c 3])
 
-
+(conj (range 10) (range 10))
+(zip [1 2] [3 4])
+(into [] (comp (distinct)) (range 10))
 
 (remove)
 (replace)
@@ -158,4 +160,8 @@
 (partition-all)
 (take-nth)
 
-(random-sample 0.3 [1 2 3 4 6 8 10])
+(random-sample 0.5 [1 2 3 4 6 8 10])
+(rand-int 10)
+(shuffle [1 2 3 4 5 6 7 8 9])
+
+(shuffe)
