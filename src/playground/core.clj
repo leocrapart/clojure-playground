@@ -122,13 +122,40 @@
 (concat)
 (concat [1 2] [3 4])
 
+
+(cat)
+;; flatten vector
+
+(into [] (comp cat cat (map inc)) [[[1] [2]] [[3] [4]]])
+(into [] (comp cat cat) [[[1] [2]] [[3] [4]]])
+
+(into [] (comp cat (map inc)) [[1 2] [3 4]])
+(into [] (comp cat (map inc)) [[1 2] [3 4]])
+
+(take-nth 2 (range 10))
+(take-nth 3 (range 10))
+(take-nth 4 (range 10))
+(take-nth 1 (range 10))
+
+(rand-nth [1 2 3])
+(rand-nth '(1 2 3))
+(rand-nth '(1 2 3))
+
+(count {:a 1 :b 2})
+(seq {:a 1 :b 2})
+(conj {:a 1 :b 2} {:c 3})
+(conj {:a 1 :b 2} [:c 3])
+
+
+
 (remove)
 (replace)
 (keep)
 (keep-indexed)
-(cat)
 (dedupe)
 (random-sample)
 (partition-by)
 (partition-all)
 (take-nth)
+
+(random-sample 0.3 [1 2 3 4 6 8 10])
