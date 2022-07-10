@@ -153,6 +153,24 @@
 (remove)
 (replace)
 (keep)
+
+;; keep = map + filter nils
+(defn nillify-zero-square-x [x]
+  (if (= x 0)
+    nil
+    (* x x)))
+
+(nillify-zero 0)
+(nillify-zero 2)
+
+
+(range 10)
+(keep nillify-zero-square-x (range 10))
+
+(keep even? [1 2 3 4])
+(map even? [1 2 3 4])
+(filter even? [1 2 3 4])
+
 (keep-indexed)
 (dedupe)
 (random-sample)
@@ -165,3 +183,33 @@
 (shuffle [1 2 3 4 5 6 7 8 9])
 
 (shuffe)
+
+
+(map (fn [x] [x x]) (range 10))
+
+(defn duplicate [x]
+  [x x])
+
+(vector 1 1)
+(vec (range 10))
+
+(range 0 10 1)
+
+(defn dedouble [coll]
+  (into [] (comp (map duplicate) cat) coll))
+
+(dedouble (range 10))
+(dedouble (range 10))
+
+(into [] (comp (map duplicate) cat) (range 10))
+(into [] (comp (map (fn [x] (repeat 2 x))) cat) (range 10))
+(fn (repeat 2 x))
+
+(type #{1 2 3})
+(type #())
+(map (fn [x] [x x]) [1 2 3])
+(map #([% %]) [1 2 3])
+(map (#([% %])))
+
+
+#()
