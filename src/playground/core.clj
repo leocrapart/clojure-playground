@@ -152,6 +152,10 @@
 
 (remove)
 (replace)
+
+(replace {1 2 3 4 5 6 7 8 9 10} [1 2 3 4 5 6 7 8 9])
+(replace [1 2 3 5 6 7 8 9 10] [1 2 3 4 5 6 7 8 9])
+(replace {:a "b" :b "c"} ["a" "b"])
 (keep)
 
 ;; keep = map + filter nils
