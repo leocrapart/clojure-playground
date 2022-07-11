@@ -156,6 +156,14 @@
 (replace {1 2 3 4 5 6 7 8 9 10} [1 2 3 4 5 6 7 8 9])
 (replace [1 2 3 5 6 7 8 9 10] [1 2 3 4 5 6 7 8 9])
 (replace {:a "b" :b "c"} ["a" "b"])
+(replace [1 2 3 4] ["index1" "index2"])
+
+;; select 1 2 3 in [10 2 3 4]s
+(replace [10 2 3 4] [1 2 3])
+
+;;select 0 2 7 in [0 1 2 3 4 5 6 7]
+(replace ["0" "1" "2" "3" "4" "5" "6" "7"] [0 2 7])
+
 (keep)
 
 ;; keep = map + filter nils
