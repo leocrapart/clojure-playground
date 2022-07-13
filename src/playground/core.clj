@@ -370,3 +370,14 @@
 (average
   (map transducer-better-than-no-transducer-of-us
     (range 100000)))
+
+
+
+
+
+(into [] (comp (take-while #(not= % 3))
+               (drop-while #(not= % 10)))
+          [0 1 1 2 2 1 10 2 3 4 5 6])
+
+
+
