@@ -264,3 +264,109 @@
 
 #()
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(take 2 [1 2 3 4 5])
+(take-nth 3 [1 2 3 4 5])
+(take-while even? [0 1 2 3 4 5])
+
+(drop 2 [1 2 3 4 5])
+(drop-nth)
+(drop-while even? [0 1 2 3 4 5])
+(drop-while (fn [x] (< x 5)) [0 1 2 3 4 5])
+
+(defn less-than-five? [x]
+  (< x 5))
+
+(drop-while less-than-five? [0 1 2 3 4 5])
+(drop-while less-than-five? [0 1 1 2 2 1 10 2 3 4 5 6])
+(take-while less-than-five? [0 1 1 2 2 1 10 2 3 4 5 6])
+(take-while less-than-five?)
+
+(into [] (comp (take-while (fn [x] (not= x 3)))
+               (drop-while (fn [x] (not= x 10)))) 
+          [0 1 1 2 2 1 10 2 3 4 5 6])
+
+(time
+  (into [] (comp (take-while (fn [x] (not= x 3)))
+               (drop-while (fn [x] (not= x 10)))) 
+          [0 1 1 2 2 1 10 2 3 4 5 6]))
+
+(keep (fn [x] (if (>= x 5) x))
+      [0 1 2 3 4 5 6 7 8 9])
+
+
+(time)
+(time (even? 2))
+
+
+(defn time-str [expr]
+  (with-out-str (time expr)))
+
+(defn time-value [expr]
+  (Double/parseDouble
+  ((clojure.string/split 
+  ((clojure.string/split (time-str expr) #": ") 1)
+  #" msec") 0)))
+
+(time-value (= 3 3))
+
+(defn time-transducer []
+  (time-value
+    (into [] (comp (take-while (fn [x] (not= x 3)))
+                 (drop-while (fn [x] (not= x 10)))) 
+            [0 1 1 2 2 1 10 2 3 4 5 6])))
+
+
+(defn time-no-transducer []
+  (time-value
+    (vec
+      (drop-while (fn [x] (not= x 10))
+        (take-while (fn [x] (not= x 3))
+          [0 1 1 2 2 1 10 2 3 4 5 6])))))
+
+
+
+(time-transducer)
+(time-no-transducer)
+
+(defn transducer-better-than-no-transducer-of-ms []
+  (- (time-no-transducer) (time-transducer)))
+
+(transducer-better-than-no-transducer-of-ms)
+
+(* (transducer-better-than-no-transducer-of-ms) 1000)
+
+(defn transducer-better-than-no-transducer-of-us [_]
+  (* (transducer-better-than-no-transducer-of-ms) 1000))
+
+(transducer-better-than-no-transducer-of-us 1)
+
+
+
+(defn average [coll] 
+  (/ (reduce + coll) (count coll)))
+
+(average [1 2 3 4 5 6])
+
+(average
+  (map transducer-better-than-no-transducer-of-us
+    (range 100000)))
