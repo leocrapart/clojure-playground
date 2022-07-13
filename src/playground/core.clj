@@ -190,6 +190,44 @@
 (partition-all)
 (take-nth)
 
+
+;; helper tool for digital twin
+
+;; interactive tester
+;; route predefined
+;; easy manual testing
+
+
+;; choose the library for http requests
+;; should be simple one
+
+
+;; api given to user to play with digital twin api
+
+
+
+
+
+(defn GET-entity-route 
+  ([entity-id] 
+    (str "/api/entities/" entity-id))
+  ([entity-id entity-pk]
+    (str "/api/entities" entity-id "?pk=" entity-pk)))
+
+
+
+(comment
+  (GET-entity-route "id_1_test_qa"))
+
+
+
+
+
+
+
+
+
+
 (random-sample 0.5 [1 2 3 4 6 8 10])
 (rand-int 10)
 (shuffle [1 2 3 4 5 6 7 8 9])
@@ -225,3 +263,4 @@
 
 
 #()
+
