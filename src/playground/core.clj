@@ -1,5 +1,6 @@
 (ns playground.core
-  (:gen-class))
+  (:gen-class)
+  (:require [clojure.string :as str]))
 
 (defn -main
   "I don't do a whole lot ... yet."
@@ -381,3 +382,84 @@
 
 
 
+
+
+
+;;scrapping
+;get all likes made on les.confitures.de.valerie profile
+
+
+; posts-urls -> post-likes -> total-likes
+
+
+(def url "https://www.instagram.com/les.confitures.de.valerie/")
+(def html (slurp url))
+
+html
+(count html)
+
+(str/split "la la" #" ")
+
+(def html-lines (str/split-lines html))
+
+;;filter non href tags
+
+(defn contains-href-tag? [str]
+  (str/includes? str "href"))
+
+(def href-lines (filter contains-href-tag? html-lines))
+
+href-lines
+(clojure.pprint/pprint href-lines)
+(clojure.pprint/pprint html-lines)
+
+;; remove link tags
+
+(filter (fn [str] (str/includes? str "tabindex"))
+  href-lines)
+
+
+(def href-tags
+  str/split html )
+;; all href
+;; all href="/p/
+
+(defn str-between [str]
+  )
+
+
+(def post-1-url "https://www.instagram.com/p/Cf9olzaoxOt/")
+(def post-2-url "https://www.instagram.com/p/CftXr1PoOCY/")
+
+
+(def post-1-likes 4)
+(def post-2-likes 8)
+
+
+(def total-likes 12)
+
+
+;; interesting : commenters
+;; top-commenters + graph with number of comments (root)
+;; [["helenebrehier" 4] ["bebou.8_3"]]
+
+
+;; interesting : likers
+
+
+
+;; transduce
+;; = transducer + reduce
+
+(def xf (comp (filter odd?) (map inc)))
+
+(range 5)
+(filter odd? (range 5))
+(map inc [1 3])
+(sequence xf (range 5))
+
+(def n 15)
+(transduce xf + (range 15))
+(reduce + (sequence xf (range 15)))
+
+(reduce + [2 4])
