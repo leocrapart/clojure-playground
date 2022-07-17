@@ -605,12 +605,74 @@ href-lines
     })
 
 
+(range (inc (max "2l")))
+(range (inc (max "1p")))
+(range (inc (max "2p")))
+
+(map inc [1 2 4])
+
+(def ranges
+  (map range (map inc [1 2 4 10 20 40 100 200])))
+
+ranges
+
+((vec ranges) 0)
+(rest ranges)
+(count ranges)
+(nth ranges (dec 8))
+
+(cons 0 (rest ranges))
+(cons 1 (rest ranges))
+
+(type (nth ranges (dec (count ranges))))
+
+(= (type 0) (type 0))
+
+(defn is-number? [thing]
+  (= (type 0) (type thing)))
+
+(defn last-element-is-number? [ranges]
+  (let [last-element (nth ranges (dec (count ranges)))]
+    (if (is-number? last-element)
+      true
+      false)))
+
+(last-element-is-number? ranges)
+(last-element-is-number? [0 1 2])
+(is-number? 2)
+(type 0)
+(type 2)
+(= (type 0) (type 2))
+
+(defn thing [possibles ranges-remaining]
+  (if (last-element-is-number? ranges-remaining)
+    possibles
+    (recur possibles ranges-remaining)))
+
+(map #(cons % (rest ranges)) [0 1])
+
 (def all-coin-pairs-possible
-  [[[1 "2l"] [2 "1l"] [4 "50p"] [10 "20p"] [20 "10p"] [40 "5p"] [100 "2p"] [200 "1p"]]
+  [(coin-pairs-from-combination [1 2 4 10 20 40 100 200])
+   (coin-pairs-from-combination [1 0 0 0 0 0 0 0])
   ])
 
+(defn coin-pairs-from-combination [combination]
+  [[(combination 0) "2l"] 
+   [(combination 1) "1l"] 
+   [(combination 2) "50p"] 
+   [(combination 3) "20p"] 
+   [(combination 4) "10p"] 
+   [(combination 5) "5p"] 
+   [(combination 6) "2p"] 
+   [(combination 7) "1p"]])
 
-()
+(coin-pairs-from-combination [1 2 4 10 20 40 100 200])
+
+(map is-2l-sum all-coin-pairs-possible)
+
+(count
+  (filter identity
+    (map is-2l-sum all-coin-pairs-possible)))
 
 
 
