@@ -185,9 +185,14 @@
 (filter even? [1 2 3 4])
 
 (keep-indexed)
+
+(keep-indexed even? [1 2 3 4])
+(keep-indexed even? + [1 2 3 4])
+
 (dedupe)
 (random-sample)
 (partition-by)
+
 (partition-all)
 (take-nth)
 
